@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Section from "../types/sideBarTypes";
-import { Button } from "../components/ui/button"; // Ensure Button is used or remove this import
+import { Button } from "../Components/ui/button"; // Ensure Button is used or remove this import
 
 interface SectionProps {
   section: Section[];

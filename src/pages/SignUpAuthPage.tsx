@@ -23,7 +23,7 @@ export default function AuthenticationPage({
                 : `Enter your email below to sign up into your ${entity} account`}
             </p>
           </div>
-          <UserAuthForm />
+          <UserAuthForm entityType={entityType} />
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{" "}
             <a

@@ -7,15 +7,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from "../components/ui/dropdown-menu";
-import { Button } from "../components/ui/button";
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardFooter,
-} from "../components/ui/card";
+} from "./ui/card";
 
 export default function Component() {
   const [filter, setFilter] = useState("all");

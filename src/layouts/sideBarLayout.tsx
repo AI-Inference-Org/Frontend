@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Section from "../types/sideBarTypes";
-import { Button } from "../components/ui/button"; // Ensure Button is used or remove this import
+import { Button } from "../Components/ui/button"; // Ensure Button is used or remove this import
+import { Link } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { isLoggedInAtom } from '../atom/global';
+import { LogOutIcon } from '../config/dashboardIcons';
 
 interface SectionProps {
   section: Section[];
@@ -9,6 +13,13 @@ interface SectionProps {
 export default function SideBar({ section }: SectionProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  const [, setIsLoggedIn] = useAtom(isLoggedInAtom);
+
+  const logout = () => {
+    localStorage.removeItem("access");
+    setIsLoggedIn(false);
+  }
 
   // Close sidebar when clicking outside of it
   useEffect(() => {
@@ -27,7 +38,7 @@ export default function SideBar({ section }: SectionProps) {
   return (
     <div className="relative min-h-screen">
       {/* Mobile menu button */}
-      <button 
+      <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         aria-controls="default-sidebar"
@@ -41,12 +52,11 @@ export default function SideBar({ section }: SectionProps) {
       </button>
 
       {/* Sidebar */}
-      <aside 
+      <aside
         ref={sidebarRef}
         id="default-sidebar"
-        className={`fixed top-0 left-0 z-40 w-64 h-full transition-transform ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } sm:translate-x-0`}
+        className={`fixed top-0 left-0 z-40 w-64 h-full transition-transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          } sm:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-black">
@@ -59,15 +69,21 @@ export default function SideBar({ section }: SectionProps) {
                 <ul className="space-y-2">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      <a href={link.href} className="flex items-center gap-3 rounded-md px-4 py-3 text-white hover:bg-[#7C3AED] transition-colors">
+                      <Link to={link.href} className="flex items-center gap-3 rounded-md px-4 py-3 text-white hover:bg-[#7C3AED] transition-colors">
                         <link.icon className="h-6 w-6" />
                         <span className="text-base font-medium">
                           {link.label}
                         </span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
+                <div onClick={logout} className="flex items-center gap-3 rounded-md px-4 py-3 text-white hover:bg-[#7C3AED] transition-colors">
+                  <LogOutIcon />
+                  <span className="text-base font-medium">
+                    Log Out
+                  </span>
+                </div>
               </div>
             ))}
           </nav>

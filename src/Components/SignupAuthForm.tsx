@@ -1,15 +1,48 @@
 import { cn } from "../lib/utils";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import { LoginFormProps } from "../types/formComponentProps";
-import { Label } from "../components/ui/label";
+import { Label } from "./ui/label";
+import { useState } from "react";
+import ConnectWalletButton from "./ConnectWalletButton";
+import { useAccount } from "wagmi";
+import { signUp } from "../apis";
+import { useToast } from "./ui/use-toast";
+import { Link } from "react-router-dom";
 
 export function UserAuthForm({ entityType }: LoginFormProps) {
   const signupUrl =
     entityType === "customer" ? "/customer/login" : "/provider/login";
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { address, } = useAccount();
+    const {toast} = useToast();
+
+
+  const signUpSubmit = async () => {
+
+    const role = entityType === "customer" ? "USER" : "SELLER";
+    let reslt = await signUp(name,email,password,address?.toString()!,role);
+
+    if (reslt === false) {
+      toast({
+        title: "Failed",
+        description: "email or wallet address already taken",
+      })
+      return;
+    }
+
+    toast({
+      title: "Success",
+      description: "User registered successfully",
+    })
+
+  }
+
   return (
     <div className={cn("grid gap-6")}>
-      <form>
         <div className="grid gap-6">
           <div className="grid gap-4">
             <Label className="text-black" htmlFor="avatar">
@@ -23,6 +56,8 @@ export function UserAuthForm({ entityType }: LoginFormProps) {
               autoCapitalize="none"
               autoComplete="url"
               autoCorrect="off"
+              value={name}
+              onChange={(e)=> setName(e.target.value)}
               required
             />
           </div>
@@ -38,6 +73,8 @@ export function UserAuthForm({ entityType }: LoginFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
+              value={email}
+              onChange={(e)=> setEmail(e.target.value)}
               required
             />
           </div>
@@ -53,20 +90,23 @@ export function UserAuthForm({ entityType }: LoginFormProps) {
               autoCapitalize="none"
               autoComplete="current-password"
               autoCorrect="off"
+              value={password}
+              onChange={(e)=> setPassword(e.target.value)}
               required
             />
           </div>
 
-          <a
-            href={signupUrl}
+          <Link
+            to={signupUrl}
             className="text-sm text-muted-foreground hover:text-sky-600"
           >
             Sign in instead?
-          </a>
+          </Link>
 
-          <Button type="submit">Sign Up</Button>
+          <ConnectWalletButton/>
+
+          <Button onClick={signUpSubmit}>Sign Up</Button>
         </div>
-      </form>
     </div>
   );
 }

@@ -67,14 +67,4 @@ export const section: Section[] = [
       },
     ],
   },
-  {
-    title: "Log Out",
-    links: [
-      {
-        href: "/logout",
-        label: "Log Out",
-        icon: LogOutIcon,
-      },
-    ],
-  },
 ];

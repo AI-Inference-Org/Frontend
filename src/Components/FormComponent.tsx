@@ -1,16 +1,50 @@
 import { cn } from "../lib/utils";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { LoginFormProps } from "../types/formComponentProps";
 import { Link } from "react-router-dom";
+import { login } from "../apis";
+import { useState } from "react";
+import { useToast } from "./ui/use-toast";
+import { useAtom } from "jotai";
+import { isLoggedInAtom, userAtom } from "../atom/global";
 
 export function FormComponent({ entityType }: LoginFormProps) {
   const signinUrl =
     entityType === "customer" ? "/customer/signup" : "/provider/signup";
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { toast } = useToast();
+
+  const [, setIsLoggedIn] = useAtom(isLoggedInAtom);
+  const [, setUser] = useAtom(userAtom);
+
+  const loginSubmit = async () => {
+    let reslt = await login(email, password);
+    
+    if (reslt === null) {
+      toast({
+        title: "Failed",
+        description: "Invalid credentials",
+      })
+      return;
+    }
+
+    toast({
+      title: "Success",
+      description: "Logged in successfully",
+    })
+
+    setUser(reslt);
+    
+    setIsLoggedIn(true);
+
+  }
+
   return (
     <div className={cn("grid gap-6")}>
-      <form>
         <div className="grid gap-6">
           <div className="grid gap-4">
             <Label className="text-black" htmlFor="email">
@@ -24,6 +58,8 @@ export function FormComponent({ entityType }: LoginFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -39,6 +75,8 @@ export function FormComponent({ entityType }: LoginFormProps) {
               autoCapitalize="none"
               autoComplete="current-password"
               autoCorrect="off"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -48,9 +86,8 @@ export function FormComponent({ entityType }: LoginFormProps) {
           >
             Sign up instead?
           </Link>
-          <Button className="w-full">Sign In</Button>
+          <Button onClick={loginSubmit} className="w-full">Sign In</Button>
         </div>
-      </form>
     </div>
   );
 }

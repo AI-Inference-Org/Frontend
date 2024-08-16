@@ -3,13 +3,13 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
+} from "./ui/card";
 import { CartesianGrid, XAxis, Bar, BarChart } from "recharts";
 import {
   ChartTooltipContent,
   ChartTooltip,
   ChartContainer,
-} from "../components/ui/chart";
+} from "./ui/chart";
 
 function DashboardView() {
   return (

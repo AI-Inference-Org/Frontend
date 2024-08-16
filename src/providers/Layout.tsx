@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 // import Navbar from "@/components/shared/Navbar";
-import { Toaster } from "../components/ui/toaster";
+import { Toaster } from "../Components/ui/toaster";
 import {
   useBackButton,
   useClosingBehavior,

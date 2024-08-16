@@ -3,8 +3,8 @@ import {
   CardHeader,
   CardTitle,
   CardContent,
-} from "../components/ui/card";
-import { Button } from "../components/ui/button";
+} from "./ui/card";
+import { Button } from "./ui/button";
 import ConnectWalletButton from "./ConnectWalletButton";
 
 export default function Component() {

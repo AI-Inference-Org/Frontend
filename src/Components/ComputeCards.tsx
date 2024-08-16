@@ -4,8 +4,8 @@ import {
   CardTitle,
   CardContent,
   CardFooter,
-} from "../components/ui/card";
-import { Button } from "../components/ui/button";
+} from "./ui/card";
+import { Button } from "./ui/button";
 
 export default function Component() {
   const products = [

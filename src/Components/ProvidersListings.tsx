@@ -1,14 +1,14 @@
 import { useState, useMemo } from "react";
-import { Input } from "../components/ui/input";
-import { Card } from "../components/ui/card";
-import { Button } from "../components/ui/button";
+import { Input } from "./ui/input";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "../components/ui/select";
+} from "./ui/select";
 
 export default function Component() {
   const [searchTerm, setSearchTerm] = useState("");

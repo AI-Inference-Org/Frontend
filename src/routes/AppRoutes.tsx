@@ -14,20 +14,57 @@ import UserAIMarketPlace from "../pages/userAIMarketPlace";
 import ComputeMarketPlace from "../pages/ComputeMarketplace";
 import CheckOutPage from "../pages/CheckoutPage";
 import { useEffect } from "react";
+import { useAtom } from "jotai";
+import { isLoggedInAtom, userAtom } from "../atom/global";
+import { getMe } from "../apis";
+import { User } from "../types/interfaces";
 
 const AppRoutes = () => {
 
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
+  const [user, setUser] = useAtom(userAtom);
 
-  useEffect(()=>{
+  const checkLogin = async () => {
 
-    const token = localStorage.getItem("access");
+    let user = await getMe() as User | null;
 
-    if (token === null) {
+    if (user === null) {
+      localStorage.removeItem("access");
       navigate("/");
+      return;
     }
 
-  },[])
+    setUser(user);
+    setIsLoggedIn(true);
+
+    if (user?.role === "USER") {
+      navigate("/customer/dashboard");
+    } else {
+      navigate("/provider/dashboard");
+    }
+
+  }
+
+  useEffect(() => {
+
+    if (!isLoggedIn) {
+      checkLogin();
+    }
+
+  }, [])
+
+  useEffect(() => {
+    if (isLoggedIn === false) {
+      navigate("/");
+      return;
+    }
+    if (user?.role === "USER") {
+      navigate("/customer/dashboard");
+    } else if (user?.role === "SELLER") {
+      navigate("/provider/dashboard");
+    }
+  }, [isLoggedIn])
 
   return (
     <div>

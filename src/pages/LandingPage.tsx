@@ -1,7 +1,7 @@
 "use client";
 import { MainNav } from "../Components/landingNav";
 import Landing from "../Components/textEffect";
-import { Button } from "../components/ui/button";
+import { Button } from "../Components/ui/button";
 import Globe from "../Components/globe";
 import Plugin from "../assets/simplify.svg";
 import ConnectButton from "../Components/ConnectWalletButton";
