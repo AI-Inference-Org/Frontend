@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Section from "../types/sideBarTypes";
 import { Button } from "../Components/ui/button"; // Ensure Button is used or remove this import
+import { Link } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { isLoggedInAtom } from '../atom/global';
+import { LogOutIcon } from '../config/dashboardIcons';
 
 interface SectionProps {
   section: Section[];
@@ -10,6 +14,12 @@ export default function SideBar({ section }: SectionProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
+  const [, setIsLoggedIn] = useAtom(isLoggedInAtom);
+
+  const logout = () => {
+    localStorage.removeItem("access");
+    setIsLoggedIn(false);
+  }
   // Close sidebar when clicking outside of it
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -59,17 +69,23 @@ export default function SideBar({ section }: SectionProps) {
                 <ul className="space-y-2">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      <a href={link.href} className="flex items-center gap-3 rounded-md px-4 py-3 text-white hover:bg-[#7C3AED] transition-colors">
+                      <Link to={link.href} className="flex items-center gap-3 rounded-md px-4 py-3 text-white hover:bg-[#7C3AED] transition-colors">
                         <link.icon className="h-6 w-6" />
                         <span className="text-base font-medium">
                           {link.label}
                         </span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
+            <div onClick={logout} className="flex items-center gap-3 rounded-md px-4 py-3 text-white hover:bg-[#7C3AED] transition-colors">
+              <LogOutIcon />
+              <span className="text-base font-medium">
+                Log Out
+              </span>
+            </div>
           </nav>
           <div className="mt-8 bg-black rounded-md p-6 border border-white">
             <h3 className="text-lg font-semibold text-white mb-3">

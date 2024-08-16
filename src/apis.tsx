@@ -134,14 +134,14 @@ export const createDeployment = async (name:string, category: string, status: st
 }
 
 
-export const getDeployments = async (userId: number): Promise<Deployment[]> => {
+export const getDeployments = async (userId: number | null): Promise<Deployment[]> => {
 
     try {   
 
         let token = localStorage.getItem("access");
 
-
-        const resp = await fetch(`${BACKEND_URL}/deployment/?userId=${userId}&limit=100&page=1`, {
+        let url = userId === null ? `${BACKEND_URL}/deployment/?limit=100&page=1` : `${BACKEND_URL}/deployment/?userId=${userId}&limit=100&page=1`;
+        const resp = await fetch(url, {
             method: "GET",
             headers: {
                 "Content-type": "application/json",

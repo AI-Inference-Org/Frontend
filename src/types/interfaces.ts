@@ -21,4 +21,12 @@ export interface Deployment {
     "price": number
     "type": string
     "userId": number
+    "user": {
+        "id": number,
+        "email": string,
+        "name":  string,
+        "role": string,
+        "wallet_address": string,
+        "isEmailVerified": boolean,
+    };
 }

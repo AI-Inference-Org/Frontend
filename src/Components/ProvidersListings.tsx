@@ -1,14 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "./ui/select";
 import { getDeployments } from "../apis";
 import { useAtom } from "jotai";
 import { userAtom } from "../atom/global";
