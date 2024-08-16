@@ -1,4 +1,5 @@
 import { User } from "@telegram-apps/sdk-react";
+import { Deployment } from "./types/interfaces";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
@@ -131,4 +132,35 @@ export const createDeployment = async (name:string, category: string, status: st
     }
 
 }
+
+
+export const getDeployments = async (userId: number): Promise<Deployment[]> => {
+
+    try {   
+
+        let token = localStorage.getItem("access");
+
+
+        const resp = await fetch(`${BACKEND_URL}/deployment/?userId=${userId}&limit=100&page=1`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        const jsn: Deployment[] = await resp.json();
+        if (resp.status === 200) {
+            return jsn;
+        }
+
+        return [];
+
+    } catch (err: any) {
+        console.log(err);
+        return [];
+    }
+
+}
+
 
