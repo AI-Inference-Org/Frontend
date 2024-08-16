@@ -96,3 +96,39 @@ export const getMe = async (): Promise<User | null> => {
     }
 
 }
+
+
+
+export const createDeployment = async (name:string, category: string, status: string, description: string, url: string, price: number, type: string): Promise<boolean> => {
+
+    try {
+        const resp = await fetch(`${BACKEND_URL}/deployment`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("access")}`
+            },
+            body: JSON.stringify({
+                name,
+                category,
+                status,
+                description,
+                url,
+                price,
+                type
+            })
+        });
+        
+        if (resp.status === 201) {
+            return true;
+        }
+
+        return false;
+
+    } catch (err: any) {
+        console.log(err);
+        return false;
+    }
+
+}
+

@@ -8,8 +8,36 @@ import {
 } from "./ui/card";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { useState } from "react";
+import { createDeployment } from "../apis";
+import { useToast } from "./ui/use-toast";
 
 function AIApplicationForm() {
+
+  const [name, setName] = useState("Gemma");
+  const [category, setCategory] = useState("Image Classification");
+  const [status, setStatus] = useState("Production Ready");
+  const [description, setDescription] = useState("");
+  const [url, setUrl] = useState("");
+  const [price, setPrice] = useState(0.0);
+  const {toast} = useToast();
+
+  const onSubmit = async () => {
+    const rslt = await createDeployment(name,category,status,description, url, price, "AI_APPLICATION");
+
+    if (rslt) {
+      toast({
+        title: "Success",
+        description: "AI Application Deployment created",
+      })
+    } else {
+      toast({
+        title: "Failed",
+        description: "Failed to createAI Application Deployment",
+      })
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col mx-auto pt-5">
@@ -55,6 +83,8 @@ function AIApplicationForm() {
                   id="name"
                   type="text"
                   placeholder="Gemma"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                   className="text-black placeholder:text-black"
                 />
@@ -67,6 +97,8 @@ function AIApplicationForm() {
                   <Input
                     id="category"
                     placeholder="Image Classification"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
                     required
                     className="text-black placeholder:text-black"
                   />
@@ -78,6 +110,8 @@ function AIApplicationForm() {
                   <Input
                     id="status"
                     placeholder="Production Ready"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
                     required
                     className="text-black placeholder:text-black"
                   />
@@ -91,6 +125,8 @@ function AIApplicationForm() {
                   id="description"
                   type="text"
                   placeholder=""
+                  value={description}
+                  onChange={(e)=> setDescription(e.target.value)}
                   required
                   className="text-black placeholder:text-black"
                 />
@@ -104,6 +140,8 @@ function AIApplicationForm() {
                   id="link"
                   type="text"
                   placeholder=""
+                  value={url}
+                  onChange={(e)=> setUrl(e.target.value)}
                   required
                   className="text-black placeholder:text-black"
                 />
@@ -116,13 +154,16 @@ function AIApplicationForm() {
                   id="price"
                   type="number"
                   placeholder=""
+                  value={price}
+                  onChange={(e)=> setPrice(parseFloat(e.target.value))}
+                  min={0.01}
                   required
                   className="text-black placeholder:text-black"
                 />
               </div>
 
               <Button
-                type="submit"
+                onClick={onSubmit}
                 className="w-full bg-black hover:bg-[#7C3AED] text-white"
               >
                 Create Order
