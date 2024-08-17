@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -17,10 +17,10 @@ import {
   CardFooter,
 } from "./ui/card";
 import { useAtom } from "jotai";
-import { userAtom, selectedProductAtom } from "../atom/global";
+import { selectedProductAtom } from "../atom/global";
 import { Deployment } from "../types/interfaces";
 import { getDeployments } from "../apis";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Component() {
   const [filter, setFilter] = useState("all");

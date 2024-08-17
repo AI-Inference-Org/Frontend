@@ -1,15 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { CartesianGrid, XAxis, Bar, BarChart } from "recharts";
-import {
-  ChartTooltipContent,
-  ChartTooltip,
-  ChartContainer,
-} from "./ui/chart";
+import { ChartTooltipContent, ChartTooltip, ChartContainer } from "./ui/chart";
 
 function DashboardView() {
   return (

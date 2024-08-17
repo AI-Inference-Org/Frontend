@@ -157,3 +157,27 @@ export const getDeployments = async (
     return [];
   }
 };
+
+export const getChatSupport = async (question: string) => {
+  try {
+    const resp = await fetch(`https://chat-model-w5wr.onrender.com/chat`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        question,
+        model: "mixtral-8x7b-32768",
+        memory_length: 5,
+      }),
+    });
+
+    if (resp.status === 201) {
+      return resp;
+    }
+
+    return false;
+  } catch (error) {
+    return error;
+  }
+};

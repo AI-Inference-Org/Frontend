@@ -46,6 +46,16 @@ export default function VoiceAssistant() {
     } else if (command.toLowerCase().includes("ai compute page")) {
       speak("Navigating to the apis page.");
       navigate("/list/compute");
+    } else if (
+      command.toLowerCase().includes("what does this application do")
+    ) {
+      speak(
+        "Our AI marketplace lets developers list their AI services, which customers can buy and use directly. It’s a fully decentralized platform for seamless transactions."
+      );
+    } else if (command.toLowerCase().includes("what can you do")) {
+      speak(
+        "I’m here to help you navigate our decentralized AI marketplace, where developers list their AI services and customers can buy and use them. Let me know if you have any questions about how it works!"
+      );
     } else {
       speak("Command not recognized. Please try again.");
       console.log("Command not recognized");

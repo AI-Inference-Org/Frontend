@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 export default function Component() {
   const [selectedProduct] = useAtom(selectedProductAtom);
+  const [hidden, setHidden] = useState(true);
   const [products, setProducts] = useState<Deployment[]>([]);
   console.log(products);
   const getListings = async () => {
@@ -75,51 +76,62 @@ export default function Component() {
               </div>
 
               <ConnectWalletButton />
-              <Button className="w-full">Paid</Button>
+              <Button
+                className="w-full"
+                onClick={() => {
+                  setHidden(false);
+                }}
+              >
+                Paid
+              </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-      <div className="">
-        <Card className="lg:min-w-[70rem]">
-          <CardHeader>
-            <CardTitle>Order</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              <div>
-                <p className="font-medium">Seller Wallet Address</p>
-                <p className="text-muted-foreground">
-                  {Array.from(
-                    new Set(
-                      products.map((product) => product.user.wallet_address)
-                    )
-                  ).map((wallet_address, index) => (
-                    <p key={index}>{wallet_address}</p>
-                  ))}{" "}
-                </p>
+      {!hidden && (
+        <div className="">
+          <Card className="lg:min-w-[70rem]">
+            <CardHeader>
+              <CardTitle>Order</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                <div>
+                  <p className="font-medium">Seller Wallet Address</p>
+                  <p className="text-muted-foreground">
+                    {Array.from(
+                      new Set(
+                        products.map((product) => product.user.wallet_address)
+                      )
+                    ).map((wallet_address, index) => (
+                      <p key={index}>{wallet_address}</p>
+                    ))}{" "}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-medium">Amount Paid</p>
+                  <p className="text-2xl font-bold">${selectedProduct.price}</p>
+                </div>
+                <div>
+                  <p className="font-medium">Buying Type</p>
+                  <p className="text-muted-foreground">
+                    {selectedProduct.type}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-medium">Product Url</p>
+                  <Link
+                    to={selectedProduct.url}
+                    className="text-blue-500 underline"
+                  >
+                    {selectedProduct.url}
+                  </Link>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Amount Paid</p>
-                <p className="text-2xl font-bold">${selectedProduct.price}</p>
-              </div>
-              <div>
-                <p className="font-medium">Buying Type</p>
-                <p className="text-muted-foreground">{selectedProduct.type}</p>
-              </div>
-              <div>
-                <p className="font-medium">Product Url</p>
-                <Link
-                  to={selectedProduct.url}
-                  className="text-blue-500 underline"
-                >
-                  {selectedProduct.url}
-                </Link>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

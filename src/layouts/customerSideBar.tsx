@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import { isLoggedInAtom } from "../atom/global";
 import { LogOutIcon } from "../config/dashboardIcons";
 import VoiceAssistant from "../Components/VoiceAssistance";
+import { getChatSupport } from "../apis";
 
 interface SectionProps {
   section: Section[];

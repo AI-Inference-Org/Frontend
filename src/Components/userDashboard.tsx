@@ -1,52 +1,23 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { CartesianGrid, XAxis, Bar, BarChart } from "recharts";
-import {
-  ChartTooltipContent,
-  ChartTooltip,
-  ChartContainer,
-} from "./ui/chart";
+import { ChartTooltipContent, ChartTooltip, ChartContainer } from "./ui/chart";
 
 function DashboardView() {
   return (
     <div>
       <div className="flex-1 p-6 md:p-8 lg:p-10 xl:p-12  flex flex-col">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6 ">
-          <Card className="bg-white text-black ">
-            <CardContent className="h-[10rem] p-6">
-              <div className="text-2xl font-bold">125</div>
-              <div className="text-sm">Form Submissions</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white text-black">
-            <CardContent className="h-[10rem] p-6">
-              <div className="text-2xl font-bold">98%</div>
-              <div className="text-sm">Conversion Rate</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white text-black">
-            <CardContent className="h-[10rem] p-6">
-              <div className="text-2xl font-bold">$12,345</div>
-              <div className="text-sm">Revenue Generated</div>
-            </CardContent>
-          </Card>
-        </div>
         <div className="grid lg:grid-cols-2 gap-4 flex-1">
           <Card className="bg-white text-black">
             <CardHeader>
-              <CardTitle className="text-xl">Recent Activity</CardTitle>
+              <CardTitle className="text-xl">Recent Buyings</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-semibold">New Lead</div>
+                    <div className="font-semibold">AI ChatBot</div>
                     <div className="text-sm text-muted-foreground">
-                      John Doe signed up
+                      From: Shlok
                     </div>
                   </div>
                   <div className="text-sm text-muted-foreground">
@@ -55,18 +26,18 @@ function DashboardView() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-semibold">New Order</div>
+                    <div className="font-semibold">AI Binary</div>
                     <div className="text-sm text-muted-foreground">
-                      Order #12345 placed
+                      From: Jonny
                     </div>
                   </div>
                   <div className="text-sm text-muted-foreground">1 day ago</div>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="font-semibold">New Project</div>
+                    <div className="font-semibold">Rest API</div>
                     <div className="text-sm text-muted-foreground">
-                      Project Acme launched
+                      From: Alex
                     </div>
                   </div>
                   <div className="text-sm text-muted-foreground">
@@ -79,13 +50,13 @@ function DashboardView() {
           <div className="grid gap-4">
             <Card className="bg-white text-black">
               <CardHeader>
-                <CardTitle className="text-xl">Upcoming Tasks</CardTitle>
+                <CardTitle className="text-xl">Services Ending</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-semibold">Design Review</div>
+                      <div className="font-semibold">Design Bot</div>
                       <div className="text-sm text-muted-foreground">
                         Review new website design
                       </div>
@@ -96,7 +67,7 @@ function DashboardView() {
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-semibold">Team Meeting</div>
+                      <div className="font-semibold">Meeting NoteTaker Bot</div>
                       <div className="text-sm text-muted-foreground">
                         Discuss project roadmap
                       </div>
@@ -105,7 +76,7 @@ function DashboardView() {
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-semibold">Client Call</div>
+                      <div className="font-semibold">Chat Bot</div>
                       <div className="text-sm text-muted-foreground">
                         Follow up on proposal
                       </div>

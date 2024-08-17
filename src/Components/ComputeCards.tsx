@@ -11,13 +11,13 @@ export default function Component() {
   const products = [
     {
       name: "GPT-3",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      description: "Powerful language model for natural conversations..",
       price: 99.99,
       seller: "John Doe",
     },
     {
       name: "GPT-3",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      description: "Create unique and imaginative images with AI.",
       price: 99.99,
       seller: "Jane Smith",
     },
