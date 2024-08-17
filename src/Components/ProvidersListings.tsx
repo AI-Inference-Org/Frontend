@@ -13,21 +13,19 @@ export default function Component() {
     priceRange: [0, 1000],
   });
 
-  const [user,] = useAtom(userAtom);
+  const [user] = useAtom(userAtom);
   const [listings, setListings] = useState<Deployment[]>([]);
 
   const getListings = async () => {
-
     let listings = await getDeployments(user?.id!);
     setListings(listings);
-    console.log(listings)
-  }
+    console.log(listings);
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getListings();
-  },[])
+  }, []);
 
-  
   const filteredListings = useMemo(() => {
     return listings.filter((listing) => {
       const { category, priceRange } = filters;
@@ -39,7 +37,7 @@ export default function Component() {
       );
     });
   }, [searchTerm, filters]);
-  const handleSearch = (e:any) => {
+  const handleSearch = (e: any) => {
     setSearchTerm(e.target.value);
   };
   // const handleFilterChange = (type, value) => {
@@ -69,7 +67,7 @@ export default function Component() {
               <span className="sr-only">View listing</span>
             </a>
             <img
-              src="/placeholder.svg"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7d341odne3KTkr11wpEkCYp_uvHRHcNVMuQ&s"
               alt={listing.name}
               width={400}
               height={300}

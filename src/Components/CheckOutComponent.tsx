@@ -1,13 +1,29 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "./ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
+import { getDeployments } from "../apis";
+import { useEffect, useState } from "react";
+import { selectedProductAtom } from "../atom/global";
+import { useAtom } from "jotai";
 import ConnectWalletButton from "./ConnectWalletButton";
+import { Deployment } from "../types/interfaces";
+import { Link } from "react-router-dom";
 
 export default function Component() {
+  const [selectedProduct] = useAtom(selectedProductAtom);
+  const [products, setProducts] = useState<Deployment[]>([]);
+  console.log(products);
+  const getListings = async () => {
+    const products = await getDeployments(null);
+    setProducts(products);
+  };
+  useEffect(() => {
+    getListings();
+  }, []);
+
+  if (!selectedProduct) {
+    return <p>No product selected.</p>;
+  }
+
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6 ">
       <div>
@@ -18,18 +34,24 @@ export default function Component() {
           <CardContent>
             <div className="grid gap-4">
               <div>
-                <h3 className="text-2xl font-bold">GPT-3</h3>
+                <h3 className="text-2xl font-bold">{selectedProduct.name}</h3>
                 <p className="text-muted-foreground">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  {selectedProduct.description}
                 </p>
               </div>
               <div>
                 <p className="font-medium">Price</p>
-                <p className="text-2xl font-bold">$99.99</p>
+                <p className="text-2xl font-bold">${selectedProduct.price}</p>
               </div>
-              <div>
-                <p className="font-medium">Seller</p>
-                <p className="text-muted-foreground">John Doe</p>
+              <div className="space-y-2">
+                <p className="font-medium">Seller Name</p>
+
+                <p className="text-muted-foreground">
+                  {selectedProduct.user.name}
+                </p>
+                <p className="font-medium">Type</p>
+
+                <p className="text-muted-foreground">{selectedProduct.type}</p>
               </div>
             </div>
           </CardContent>
@@ -42,19 +64,18 @@ export default function Component() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
-              <div>
-                <p className="font-medium">Seller Wallet Address</p>
-                <p className="text-muted-foreground">
-                  0x4F42a89B944138744a608660c4891803E302f043
-                </p>
-              </div>
+              {Array.from(
+                new Set(products.map((product) => product.user.wallet_address))
+              ).map((wallet_address, index) => (
+                <p key={index}>{wallet_address}</p>
+              ))}
               <div>
                 <p className="font-medium">Amount to Pay</p>
-                <p className="text-2xl font-bold">$99.99</p>
+                <p className="text-2xl font-bold">${selectedProduct.price}</p>
               </div>
-              {/* <Button className="w-full">Pay Now</Button>
-               */}
+
               <ConnectWalletButton />
+              <Button className="w-full">Paid</Button>
             </div>
           </CardContent>
         </Card>
@@ -69,49 +90,31 @@ export default function Component() {
               <div>
                 <p className="font-medium">Seller Wallet Address</p>
                 <p className="text-muted-foreground">
-                  0x4F42a89B944138744a608660c4891803E302f043
+                  {Array.from(
+                    new Set(
+                      products.map((product) => product.user.wallet_address)
+                    )
+                  ).map((wallet_address, index) => (
+                    <p key={index}>{wallet_address}</p>
+                  ))}{" "}
                 </p>
               </div>
               <div>
                 <p className="font-medium">Amount Paid</p>
-                <p className="text-2xl font-bold">$99.99</p>
+                <p className="text-2xl font-bold">${selectedProduct.price}</p>
               </div>
               <div>
-                <p className="font-medium">API EndPoint</p>
-                <p className="text-muted-foreground">
-                  <a
-                    href="https://api.model.com/v1/current"
-                    className="text-blue-500 underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    https://api.model.com/v1/current
-                  </a>
-                </p>
+                <p className="font-medium">Buying Type</p>
+                <p className="text-muted-foreground">{selectedProduct.type}</p>
               </div>
               <div>
-                <p className="font-medium">API Key</p>
-                <p className="text-muted-foreground">
-                  <a
-                    className="text-blue-500 underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    d8f3e7a2-91c6-4c89-b7a8-12ef4f789c2b
-                  </a>
-                </p>
-              </div>
-              <div>
-                <p className="font-medium">API Secret</p>
-                <p className="text-muted-foreground">
-                  <a
-                    className="text-blue-500 underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    7f9e1c7b-b4e6-4d8c-a1f5-9d3b2e7f6c0a
-                  </a>
-                </p>
+                <p className="font-medium">Product Url</p>
+                <Link
+                  to={selectedProduct.url}
+                  className="text-blue-500 underline"
+                >
+                  {selectedProduct.url}
+                </Link>
               </div>
             </div>
           </CardContent>

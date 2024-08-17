@@ -13,29 +13,36 @@ import { useToast } from "./ui/use-toast";
 import { createDeployment } from "../apis";
 
 function AIApplicationForm() {
-
   const [name, setName] = useState("Gemma");
   const [category, setCategory] = useState("Image Classification");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [price, setPrice] = useState(0.0);
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   const onSubmit = async () => {
-    const rslt = await createDeployment(name,category,"null",description, url, price, "PLUGIN");
+    const rslt = await createDeployment(
+      name,
+      category,
+      "null",
+      description,
+      url,
+      price,
+      "PLUGIN"
+    );
 
     if (rslt) {
       toast({
         title: "Success",
         description: "Plugin Deployment created",
-      })
+      });
     } else {
       toast({
         title: "Failed",
         description: "Failed to create Plugin Deployment",
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -86,19 +93,17 @@ function AIApplicationForm() {
                   className="text-black placeholder:text-black"
                 />
               </div>
-              <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-                <Label htmlFor="category" className="text-black">
-                  Category of Plugin
-                </Label>
-                <Input
-                  id="category"
-                  placeholder="Image Classification"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  required
-                  className="text-black placeholder:text-black"
-                />
-              </div>
+              <Label htmlFor="category" className="text-black">
+                Category of Plugin
+              </Label>
+              <Input
+                id="category"
+                placeholder="Image Classification"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+                className="text-black placeholder:text-black"
+              />
               <div className="space-y-2">
                 <Label htmlFor="description" className="text-black">
                   Description of Plugin

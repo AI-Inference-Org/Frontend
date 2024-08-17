@@ -17,77 +17,31 @@ import {
   CardFooter,
 } from "./ui/card";
 import { useAtom } from "jotai";
-import { userAtom } from "../atom/global";
+import { userAtom, selectedProductAtom } from "../atom/global";
 import { Deployment } from "../types/interfaces";
 import { getDeployments } from "../apis";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Component() {
   const [filter, setFilter] = useState("all");
 
   const [products, setProducts] = useState<Deployment[]>([]);
+  const [, setSelectedProduct] = useAtom(selectedProductAtom); // Use atom to manage selected product
+  const navigate = useNavigate();
 
   const getListings = async () => {
-
-    let products = await getDeployments(null);
+    const products = await getDeployments(null);
     setProducts(products);
-  }
-
-  useEffect(()=>{
+  };
+  console.log(products);
+  useEffect(() => {
     getListings();
-  },[])
+  }, []);
 
-
-  // const products = [
-  //   {
-  //     name: "GPT-3",
-  //     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 99.99,
-  //     seller: "John Doe",
-  //     type: "api",
-  //   },
-  //   {
-  //     name: "GPT-3",
-  //     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 99.99,
-  //     seller: "Jane Smith",
-  //     type: "api",
-  //   },
-  //   {
-  //     name: "GPT-3",
-  //     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  //     price: 99.99,
-  //     seller: "Sarah Johnson",
-  //     type: "api",
-  //   },
-  //   {
-  //     name: "ChatGPT",
-  //     description: "Powerful language model for natural conversations.",
-  //     price: 149.99,
-  //     seller: "Vercel",
-  //     type: "web-app",
-  //   },
-  //   {
-  //     name: "Dall-E",
-  //     description: "Create unique and imaginative images with AI.",
-  //     price: 199.99,
-  //     seller: "OpenAI",
-  //     type: "web-app",
-  //   },
-  //   {
-  //     name: "Whisper",
-  //     description: "Accurate speech recognition and transcription.",
-  //     price: 79.99,
-  //     seller: "Anthropic",
-  //     type: "binary",
-  //   },
-  // ];
-  // const filteredProducts = useMemo(() => {
-  //   if (filter === "all") {
-  //     return products;
-  //   } else {
-  //     return products.filter((product) => product.type === filter);
-  //   }
-  // }, [filter, products]);
+  const handleBuyNow = (product: Deployment) => {
+    setSelectedProduct(product);
+    navigate("/checkout");
+  };
   return (
     <section className="w-full max-w-6xl mx-auto py-12 px-4 md:px-6">
       <div className="flex items-center justify-between mb-8">
@@ -148,7 +102,9 @@ export default function Component() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button className="ml-auto">Buy Now</Button>
+              <Button className="ml-auto" onClick={() => handleBuyNow(product)}>
+                Buy Now
+              </Button>
             </CardFooter>
           </Card>
         ))}
