@@ -10,7 +10,7 @@ import { TelegramProvider } from "./providers/TelegramProvider";
 import App from "./App";
 import { config } from "./config/wagmiProvider";
 import { BrowserRouter } from "react-router-dom";
-import regeneratorRuntime from "regenerator-runtime";
+// import regeneratorRuntime from "regenerator-runtime";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(

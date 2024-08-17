@@ -13,6 +13,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { useNavigate } from "react-router-dom";
+import { JSX } from "react/jsx-runtime";
 
 export default function VoiceAssistant() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
@@ -25,12 +26,12 @@ export default function VoiceAssistant() {
     }
   }, [listening, transcript]);
 
-  const speak = (text) => {
+  const speak = (text: string) => {
     const utterance = new SpeechSynthesisUtterance(text);
     speechSynthesis.speak(utterance);
   };
 
-  const handleVoiceCommand = (command) => {
+  const handleVoiceCommand = (command: string) => {
     if (command.toLowerCase().includes("ai plugin page")) {
       speak("Sure, I can navigate to the AI plugin page.");
       navigate("/plugins");
@@ -117,7 +118,9 @@ export default function VoiceAssistant() {
   );
 }
 
-function MicIcon(props) {
+function MicIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       {...props}
@@ -138,7 +141,9 @@ function MicIcon(props) {
   );
 }
 
-function SendIcon(props) {
+function SendIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       {...props}

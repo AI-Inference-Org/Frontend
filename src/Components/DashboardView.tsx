@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { CartesianGrid, XAxis, Bar, BarChart } from "recharts";
 import { ChartTooltipContent, ChartTooltip, ChartContainer } from "./ui/chart";
+import { ClassAttributes, HTMLAttributes } from "react";
+import { JSX } from "react/jsx-runtime";
 
 function DashboardView() {
   return (
@@ -124,7 +126,11 @@ function DashboardView() {
 
 export default DashboardView;
 
-function BarchartChart(props) {
+function BarchartChart(
+  props: JSX.IntrinsicAttributes &
+    ClassAttributes<HTMLDivElement> &
+    HTMLAttributes<HTMLDivElement>
+) {
   return (
     <div {...props}>
       <ChartContainer

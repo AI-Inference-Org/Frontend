@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
 import { getDeployments } from "../apis";
@@ -7,17 +7,18 @@ import { userAtom } from "../atom/global";
 import { Deployment } from "../types/interfaces";
 
 export default function Component() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState({
-    category: [],
-    priceRange: [0, 1000],
-  });
+  const [searchTerm] = useState("");
+  // const [filters] = useState({
+  //   category: [],
+  //   priceRange: [0, 1000],
+  // });
 
   const [user] = useAtom(userAtom);
   const [listings, setListings] = useState<Deployment[]>([]);
 
   const getListings = async () => {
-    let listings = await getDeployments(user?.id!);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    const listings = await getDeployments(user?.id!);
     setListings(listings);
     console.log(listings);
   };
@@ -26,20 +27,20 @@ export default function Component() {
     getListings();
   }, []);
 
-  const filteredListings = useMemo(() => {
-    return listings.filter((listing) => {
-      const { category, priceRange } = filters;
-      return (
-        listing.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (category.length === 0 || category.includes(listing.category)) &&
-        listing.price >= priceRange[0] &&
-        listing.price <= priceRange[1]
-      );
-    });
-  }, [searchTerm, filters]);
-  const handleSearch = (e: any) => {
-    setSearchTerm(e.target.value);
-  };
+  // const filteredListings = useMemo(() => {
+  //   return listings.filter((listing) => {
+  //     const { category, priceRange } = filters;
+  //     return (
+  //       listing.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+  //       (category.length === 0 || category.includes(listing.category)) &&
+  //       listing.price >= priceRange[0] &&
+  //       listing.price <= priceRange[1]
+  //     );
+  //   });
+  // }, [searchTerm, filters]);
+  // const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
+  //   setSearchTerm(e.target.value);
+  // };
   // const handleFilterChange = (type, value) => {
   //   setFilters((prevFilters) => ({
   //     ...prevFilters,
@@ -55,7 +56,7 @@ export default function Component() {
             type="search"
             placeholder="Search listings..."
             value={searchTerm}
-            onChange={handleSearch}
+            // onChange={}
             className="w-full"
           />
         </div>
@@ -114,7 +115,7 @@ export default function Component() {
           </div>
         </div>
         <div className="text-sm text-muted-foreground">
-          Showing {filteredListings.length} of {listings.length} listings
+          Showing {listings.length} of {listings.length} listings
         </div>
       </div>
     </section>

@@ -13,31 +13,37 @@ import { useToast } from "./ui/use-toast";
 import { createDeployment } from "../apis";
 
 function AIApplicationForm() {
-
-  const [name, setName] = useState("Gemma");
+  // const [name, setName] = useState("Gemma");
   const [category, setCategory] = useState("Image Classification");
-  const [status, setStatus] = useState("Production Ready");
+  // const [status, setStatus] = useState("Production Ready");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [price, setPrice] = useState(0.0);
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   const onSubmit = async () => {
-    const rslt = await createDeployment("naan",category,"naan",description, url, price, "API");
+    const rslt = await createDeployment(
+      "naan",
+      category,
+      "naan",
+      description,
+      url,
+      price,
+      "API"
+    );
 
     if (rslt) {
       toast({
         title: "Success",
         description: "API Deployment created",
-      })
+      });
     } else {
       toast({
         title: "Failed",
         description: "Failed to API Deployment",
-      })
+      });
     }
-  }
-
+  };
 
   return (
     <>

@@ -37,7 +37,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <main>
       {/* <Navbar /> */}
       <main className="">{children}</main>
-      <Toaster richColors />
+      <Toaster />
     </main>
   );
 }
