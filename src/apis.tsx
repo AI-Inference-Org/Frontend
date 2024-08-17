@@ -7,7 +7,7 @@ export const signUp = async (
   name: string,
   email: string,
   password: string,
-  walconst_address: string,
+  wallet_address: string,
   role: string
 ): Promise<boolean> => {
   try {
@@ -20,7 +20,7 @@ export const signUp = async (
         name,
         email,
         password,
-        walconst_address,
+        wallet_address,
         role,
       }),
     });
