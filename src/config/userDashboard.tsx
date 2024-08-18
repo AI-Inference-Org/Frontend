@@ -43,11 +43,11 @@ export const section: Section[] = [
   {
     title: "My Orders",
     links: [
-      {
-        href: "/orders",
-        label: "My Orders",
-        icon: Compute,
-      },
+      // {
+      //   href: "/orders",
+      //   label: "My Orders",
+      //   icon: Compute,
+      // },
       {
         href: "/payments",
         label: "My Payments",

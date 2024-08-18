@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Landing from "../pages/LandingPage";
 import AuthenticationPage from "../pages/AuthenticationPage";
 import SignUpAuthPage from "../pages/SignUpAuthPage";
@@ -18,16 +23,15 @@ import { useAtom } from "jotai";
 import { isLoggedInAtom, userAtom } from "../atom/global";
 import { getMe } from "../apis";
 import { User } from "../types/interfaces";
+import PaymentPage from "../pages/PaymentsPage";
 
 const AppRoutes = () => {
-
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
   const [user, setUser] = useAtom(userAtom);
 
   const checkLogin = async () => {
-
-    let user = await getMe() as User | null;
+    let user = (await getMe()) as User | null;
 
     if (user === null) {
       localStorage.removeItem("access");
@@ -43,16 +47,13 @@ const AppRoutes = () => {
     } else {
       navigate("/provider/dashboard");
     }
-
-  }
+  };
 
   useEffect(() => {
-
     if (!isLoggedIn) {
       checkLogin();
     }
-
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn === false) {
@@ -64,7 +65,7 @@ const AppRoutes = () => {
     } else if (user?.role === "SELLER") {
       navigate("/provider/dashboard");
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn]);
 
   return (
     <div>
@@ -105,6 +106,8 @@ const AppRoutes = () => {
         <Route path="/marketplace" element={<UserAIMarketPlace />} />
         <Route path="/compute/marketplace" element={<ComputeMarketPlace />} />
         <Route path="/checkout" element={<CheckOutPage />} />
+        <Route path="/payments" element={<PaymentPage />} />
+        {/* <Route path="/oders" element={<OrdersPage />} /> */}
       </Routes>
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import Navbar from "@/components/shared/Navbar";
 import { Toaster } from "../Components/ui/toaster";
 import {
   useBackButton,
@@ -7,36 +6,46 @@ import {
   useViewport,
 } from "@telegram-apps/sdk-react";
 import { useNavigate, useLocation } from "react-router-dom";
+
 function Layout({ children }: { children: React.ReactNode }) {
   const bb = useBackButton();
-  const close = useClosingBehavior(); // will be undefined or ClosingBehavior.
-  const viewport = useViewport(); // will be undefined or InitData.
+  const close = useClosingBehavior(); // This might be undefined or a ClosingBehavior.
+  const viewport = useViewport(); // This might be undefined or InitData.
   const navigate = useNavigate();
   const location = useLocation();
+
   useEffect(() => {
     function goBack() {
       navigate("/");
     }
+
     if (close) {
       close.enableConfirmation();
     }
+
     if (viewport) {
       viewport.expand();
     }
+
     if (bb) {
       if (location.pathname === "/") {
         bb.hide();
-        return;
+      } else {
+        bb.show();
+        bb.on("click", goBack);
       }
-      bb.show();
-      bb.on("click", goBack);
+
+      // Cleanup listener on unmount
+      return () => {
+        bb.off("click", goBack);
+      };
     }
-  }, [bb, navigate, location]);
+  }, [bb, close, viewport, navigate, location]);
 
   return (
     <main>
       {/* <Navbar /> */}
-      <main className="">{children}</main>
+      <div className="">{children}</div>
       <Toaster />
     </main>
   );

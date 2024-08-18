@@ -29,4 +29,15 @@ createRoot(document.getElementById("root")!).render(
       </QueryClientProvider>
     </WagmiProvider>
   </StrictMode>
+  // <StrictMode>
+  //   <BrowserRouter>
+  //     <WagmiProvider config={config}>
+  //       <QueryClientProvider client={queryClient}>
+  //         <RainbowKitProvider>
+  //           <App />
+  //         </RainbowKitProvider>
+  //       </QueryClientProvider>
+  //     </WagmiProvider>
+  //   </BrowserRouter>
+  // </StrictMode>
 );
