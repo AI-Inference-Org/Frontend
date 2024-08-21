@@ -47,15 +47,9 @@ To ensure the security, transparency, and decentralization of our marketplace, w
 - **For Users**: Browse available AI models, purchase, and deploy them within Telegram.
 - **For Developers**: List your AI models for sale, set your prices, and receive payments in cryptocurrency.
 
-## Contributing
+### Deployment on Spheron
 
-We welcome contributions from the community to help us improve and expand our marketplace. To contribute:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -m 'Add your feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
+We have used **Spheron** for deploying our AI models, ensuring that they are easily accessible and securely hosted in a decentralized manner. Spheron provides a seamless deployment process and leverages the power of decentralized storage, making it an ideal choice for our platform.
 
 ## License
 
