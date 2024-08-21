@@ -1,50 +1,67 @@
-# React + TypeScript + Vite
+# Decentralized AI Marketplace on Telegram Mini Apps
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Vision
 
-Currently, two official plugins are available:
+Our mission is to pioneer the world's first decentralized AI marketplace within Telegram mini apps, empowering users and developers to seamlessly access, trade, and deploy AI models in a secure, transparent, and community-driven environment. We envision a future where AI technology is democratized, allowing anyone to harness the power of artificial intelligence directly within the familiar interface of Telegram, supported by the robust security and efficiency of blockchain technology.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+- **Decentralized Marketplace**: A platform where users and developers can securely trade AI models without intermediaries, ensuring transparency and fairness in transactions.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Seamless Integration**: The marketplace is built directly within Telegram mini apps, offering a familiar and user-friendly interface for accessing and utilizing AI models.
 
-- Configure the top-level `parserOptions` property like this:
+- **Blockchain Security**: Utilizing blockchain technology to ensure the integrity and security of transactions, protecting both buyers and sellers from fraud.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Community-Driven Environment**: A platform where the community plays a central role in the governance, development, and evolution of the marketplace.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **AI Model Deployment**: Easy deployment of AI models directly within Telegram, allowing users to leverage AI technology without needing specialized knowledge or infrastructure.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Why Telegram?
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Telegram is a widely used messaging platform with a global user base, making it an ideal environment for democratizing access to AI technology. By integrating our marketplace within Telegram mini apps, we provide users with a familiar interface and seamless experience, lowering the barrier to entry for AI technology.
+
+## Blockchain Integration
+
+To ensure the security, transparency, and decentralization of our marketplace, we leverage blockchain technology. This integration allows for:
+
+- **Immutable Transactions**: All transactions are recorded on the blockchain, ensuring transparency and traceability.
+- **Smart Contracts**: Automating and securing transactions, reducing the need for intermediaries.
+- **Decentralized Governance**: The community has a say in the platform's evolution through blockchain-based voting mechanisms.
+
+## Getting Started
+
+### Prerequisites
+
+- Telegram account
+- Cryptocurrency wallet (for blockchain interactions)
+- Basic understanding of AI models (optional)
+
+### Installation
+
+1. **Join the Telegram Mini App**: Open Telegram and search for our decentralized AI marketplace mini app.
+2. **Set Up Your Wallet**: Connect your cryptocurrency wallet to enable secure transactions.
+3. **Explore AI Models**: Browse, purchase, and deploy AI models directly within the app.
+
+### Usage
+
+- **For Users**: Browse available AI models, purchase, and deploy them within Telegram.
+- **For Developers**: List your AI models for sale, set your prices, and receive payments in cryptocurrency.
+
+## Contributing
+
+We welcome contributions from the community to help us improve and expand our marketplace. To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For more information, questions, or support, please reach out to us through Telegram or visit our [website](#).
+
