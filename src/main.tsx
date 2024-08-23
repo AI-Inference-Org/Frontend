@@ -6,6 +6,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { Toaster } from "./Components/ui/toaster";
 import Layout from "./providers/Layout";
 import { TelegramProvider } from "./providers/TelegramProvider";
 import App from "./App";
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
           <BrowserRouter>
             {/* <Layout> */}
             <App />
+            <Toaster />
             {/* </Layout> */}
           </BrowserRouter>
           {/* </TelegramProvider> */}
