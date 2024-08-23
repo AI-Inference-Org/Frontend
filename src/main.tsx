@@ -18,13 +18,13 @@ createRoot(document.getElementById("root")!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <TelegramProvider>
-            <BrowserRouter>
-              <Layout>
-                <App />
-              </Layout>
-            </BrowserRouter>
-          </TelegramProvider>
+          {/* <TelegramProvider> */}
+          <BrowserRouter>
+            {/* <Layout> */}
+            <App />
+            {/* </Layout> */}
+          </BrowserRouter>
+          {/* </TelegramProvider> */}
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
