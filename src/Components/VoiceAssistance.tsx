@@ -31,21 +31,52 @@ export default function VoiceAssistant() {
     speechSynthesis.speak(utterance);
   };
 
-  const handleVoiceCommand = async (command: string) => {
-    try {
-      const response = await fetch(`${BACKEND_URL}/voice-command`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ command }),
-      });
-      return response.json();
-    } catch (error) {
-      return error;
+  // const handleVoiceCommand = async (command: string) => {
+  //   try {
+  //     const response = await fetch(`${BACKEND_URL}/voice-command`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //       },
+  //       body: JSON.stringify({ command }),
+  //     });
+  //     return response.json();
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // };
+
+  const handleVoiceCommand = (command: string) => {
+    if (command.toLowerCase().includes("ai plugin page")) {
+      speak("Sure, I can navigate to the AI plugin page.");
+      navigate("/plugins");
+    } else if (command.toLowerCase().includes("ai application page")) {
+      speak("Navigating to the AI application page.");
+      navigate("/ai/application");
+    } else if (command.toLowerCase().includes("ai binaries page")) {
+      speak("Navigating to the AI binaries page.");
+      navigate("/binaries");
+    } else if (command.toLowerCase().includes("ai apis page")) {
+      speak("Navigating to the apis page.");
+      navigate("/apis");
+    } else if (command.toLowerCase().includes("ai compute page")) {
+      speak("Navigating to the apis page.");
+      navigate("/list/compute");
+    } else if (
+      command.toLowerCase().includes("what does this application do")
+    ) {
+      speak(
+        "Our AI marketplace lets developers list their AI services, which customers can buy and use directly. It’s a fully decentralized platform for seamless transactions."
+      );
+    } else if (command.toLowerCase().includes("what can you do")) {
+      speak(
+        "I’m here to help you navigate our decentralized AI marketplace, where developers list their AI services and customers can buy and use them. Let me know if you have any questions about how it works!"
+      );
+    } else {
+      speak("Command not recognized. Please try again.");
+      console.log("Command not recognized");
     }
   };
-
   const startListening = () => {
     SpeechRecognition.startListening({ continuous: true });
   };

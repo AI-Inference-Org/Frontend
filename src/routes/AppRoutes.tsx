@@ -31,7 +31,7 @@ const AppRoutes = () => {
   const [user, setUser] = useAtom(userAtom);
 
   const checkLogin = async () => {
-    let user = (await getMe()) as User | null;
+    const user = (await getMe()) as User | null;
 
     if (user === null) {
       localStorage.removeItem("access");

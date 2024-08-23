@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime"; // Add this line
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
@@ -10,7 +11,6 @@ import { TelegramProvider } from "./providers/TelegramProvider";
 import App from "./App";
 import { config } from "./config/wagmiProvider";
 import { BrowserRouter } from "react-router-dom";
-// import regeneratorRuntime from "regenerator-runtime";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -18,26 +18,15 @@ createRoot(document.getElementById("root")!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          {/* <TelegramProvider> */}
-          <BrowserRouter>
-            {/* <Layout> */}
-            <App />
-            {/* </Layout> */}
-          </BrowserRouter>
-          {/* </TelegramProvider> */}
+          <TelegramProvider>
+            <BrowserRouter>
+              <Layout>
+                <App />
+              </Layout>
+            </BrowserRouter>
+          </TelegramProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   </StrictMode>
-  // <StrictMode>
-  //   <BrowserRouter>
-  //     <WagmiProvider config={config}>
-  //       <QueryClientProvider client={queryClient}>
-  //         <RainbowKitProvider>
-  //           <App />
-  //         </RainbowKitProvider>
-  //       </QueryClientProvider>
-  //     </WagmiProvider>
-  //   </BrowserRouter>
-  // </StrictMode>
 );
